@@ -4,24 +4,44 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"github.com/julienschmidt/httprouter"
 	"os/exec"
 	"so1/practica2/models"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func GetOutput(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func GetCPUOutput(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	enableCors(&w)
 
-	newOutput := models.Output{}
-	
-	cmd := exec.Command("sh", "-c", "cat /proc/p2_module")
+	newOutput := models.CPUOutput{}
+
+	cmd := exec.Command("sh", "-c", "cat /proc/cpu_201801434")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err)
 	}
 	output := string(out[:])
 	newOutput.Output = output
-	
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json, _ := json.Marshal(newOutput)
+	fmt.Fprintf(w, "%s\n", json)
+}
+
+func GetRAMOutput(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	enableCors(&w)
+
+	newOutput := models.RAMOutput{}
+
+	cmd := exec.Command("sh", "-c", "cat /proc/ram_201801434")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Println(err)
+	}
+	output := string(out[:])
+	newOutput.Output = output
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json, _ := json.Marshal(newOutput)

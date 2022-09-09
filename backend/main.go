@@ -2,18 +2,20 @@ package main
 
 import (
 	"net/http"
+	"so1/practica2/controllers"
+
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
-	"so1/practica2/controllers"
 )
 
 func main() {
 
 	r := httprouter.New()
 
-	r.GET("/api/systeminfo", controllers.GetOutput)
+	r.GET("/api/cpuinfo", controllers.GetCPUOutput)
+	r.GET("/api/raminfo", controllers.GetRAMOutput)
 
 	handler := cors.Default().Handler(r)
-	
+
 	http.ListenAndServe(":9000", handler)
 }
