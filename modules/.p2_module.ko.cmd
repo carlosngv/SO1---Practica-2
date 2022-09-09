@@ -1,0 +1,1 @@
+cmd_/home/carlosngv/Desktop/U/SO1/Practica2/modules/p2_module.ko := ld -r -m elf_x86_64 --build-id=sha1  -T scripts/module.lds -o /home/carlosngv/Desktop/U/SO1/Practica2/modules/p2_module.ko /home/carlosngv/Desktop/U/SO1/Practica2/modules/p2_module.o /home/carlosngv/Desktop/U/SO1/Practica2/modules/p2_module.mod.o;  true
