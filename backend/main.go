@@ -12,8 +12,9 @@ func main() {
 
 	r := httprouter.New()
 
-	r.GET("/api/cpuinfo", controllers.GetCPUOutput)
-	r.GET("/api/raminfo", controllers.GetRAMOutput)
+	r.GET("/api/cpu/info", controllers.GetCPUOutput)
+	r.GET("/api/cpu/usage", controllers.GetCPUUsage)
+	r.GET("/api/ram/info", controllers.GetRAMOutput)
 
 	handler := cors.Default().Handler(r)
 
